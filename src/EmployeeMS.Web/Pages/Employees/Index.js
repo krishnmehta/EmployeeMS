@@ -1,5 +1,7 @@
 ﻿$(function () {
     var l = abp.localization.getResource('EmployeeMS');
+    var createModal = new abp.ModalManager(abp.appPath + 'Employees/CreateModal');
+    var editModal = new abp.ModalManager(abp.appPath + 'Employees/EditModal');
 
     var dataTable = $('#EmployeesTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
@@ -11,12 +13,45 @@
             ajax: abp.libs.datatables.createAjax(employeeMS.employees.employee.getList),
             columnDefs: [
                 {
+                    title: l('Actions'),
+                    rowAction: {
+                        items:
+                            [
+                                {
+                                    text: l('Edit'),
+                                    action: function (data) {
+                                        editModal.open({ id: data.record.id });
+                                    }
+                                },
+                                {
+                                    text: l('Delete'),
+                                    confirmMessage: function (data) {
+                                        return l(
+                                            'EmployeeDeletionConfirmationMessage',
+                                            data.record.name
+                                        );
+                                    },
+                                    action: function (data) {
+                                        employeeMS.employees.employee
+                                            .delete(data.record.id)
+                                            .then(function () {
+                                                abp.notify.info(
+                                                    l('SuccessfullyDeleted')
+                                                );
+                                                dataTable.ajax.reload();
+                                            });
+                                    }
+                                }
+                            ]
+                    }
+                },
+                {
                     title: l('Name'),
                     data: "name"
                 },
                 {
                     title: l('Age'),
-                    data: "age"
+                    data: "age",
                     
                 },
                 {
@@ -29,20 +64,17 @@
                 },
                 {
                     title: l('CreationTime'), data: "creationTime",
-                    render: function (data) {
-                        return luxon
-                            .DateTime
-                            .fromISO(data, {
-                                locale: abp.localization.currentCulture.name
-                            }).toLocaleString(luxon.DateTime.DATETIME_SHORT);
-                    }
+                    dataFormat: "datetime"
                 }
             ]
         })
     );
-    var createModal = new abp.ModalManager(abp.appPath + 'Employees/CreateModal');
 
     createModal.onResult(function () {
+        dataTable.ajax.reload();
+    });
+
+    editModal.onResult(function () {
         dataTable.ajax.reload();
     });
 
