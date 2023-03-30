@@ -11,6 +11,6 @@ public class EmployeeMSApplicationAutoMapperProfile : Profile
          * Alternatively, you can split your mapping configurations
          * into multiple profile classes for a better organization. */
         CreateMap<Employee, EmployeeDto>();
-        CreateMap<Employee, CreateUpdateEmployeeDto>();
+        CreateMap<CreateUpdateEmployeeDto, Employee>();
     }
 }

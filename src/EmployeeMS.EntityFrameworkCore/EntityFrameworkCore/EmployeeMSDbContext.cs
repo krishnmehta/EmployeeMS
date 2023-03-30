@@ -84,6 +84,7 @@ public class EmployeeMSDbContext :
                 EmployeeMSConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+
         });
     }
 }
