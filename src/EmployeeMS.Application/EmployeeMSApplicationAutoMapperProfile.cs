@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EmployeeMS.Departments;
 using EmployeeMS.Employees;
 
 namespace EmployeeMS;
@@ -12,5 +13,7 @@ public class EmployeeMSApplicationAutoMapperProfile : Profile
          * into multiple profile classes for a better organization. */
         CreateMap<Employee, EmployeeDto>();
         CreateMap<CreateUpdateEmployeeDto, Employee>();
+        CreateMap<Department, DepartmentDto>();
+
     }
 }
