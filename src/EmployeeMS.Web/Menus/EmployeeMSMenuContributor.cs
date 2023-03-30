@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using EmployeeMS.Localization;
 using EmployeeMS.MultiTenancy;
+using EmployeeMS.Permissions;
+using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Identity.Web.Navigation;
 using Volo.Abp.SettingManagement.Web.Navigation;
 using Volo.Abp.TenantManagement.Web.Navigation;
@@ -43,7 +45,7 @@ public class EmployeeMSMenuContributor : IMenuContributor
                     "EmployeeMS.Employees",
                     l["Menu:Employees"],
                     url: "/Employees"
-                )
+                ).RequirePermissions(EmployeeMSPermissions.Employees.Default) //checking the permission
             )
         );
 

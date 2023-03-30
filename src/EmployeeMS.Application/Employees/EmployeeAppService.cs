@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeMS.Permissions;
+using System;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
@@ -17,6 +18,10 @@ public class EmployeeAppService :
     public EmployeeAppService(IRepository<Employee, Guid> repository)
         : base(repository)
     {
-
+        GetPolicyName = EmployeeMSPermissions.Employees.Default;
+        GetListPolicyName = EmployeeMSPermissions.Employees.Default;
+        CreatePolicyName = EmployeeMSPermissions.Employees.Create;
+        UpdatePolicyName = EmployeeMSPermissions.Employees.Edit;
+        DeletePolicyName = EmployeeMSPermissions.Employees.Delete;
     }
 }

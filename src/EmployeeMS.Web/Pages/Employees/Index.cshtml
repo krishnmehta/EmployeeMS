@@ -1,13 +1,16 @@
 ﻿@page
 @using EmployeeMS.Localization
+@using EmployeeMS.Permissions
 @using EmployeeMS.Web.Pages.Employees
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.Extensions.Localization
 @model IndexModel
 @inject IStringLocalizer<EmployeeMSResource> L
+@inject IAuthorizationService AuthorizationService
 @section scripts
     {
     <abp-script src="/Pages/Employees/Index.js" />
-    }
+}
 
 <abp-card>
     <abp-card-header>
@@ -16,10 +19,13 @@
                 <abp-card-title>@L["Employees"]</abp-card-title>
             </abp-column>
             <abp-column size-md="_6" class="text-end">
-                <abp-button id="NewEmployeeButton"
+                @if (await AuthorizationService.IsGrantedAsync(EmployeeMSPermissions.Employees.Create))
+                {
+                    <abp-button id="NewEmployeeButton"
                             text="@L["NewEmployee"].Value"
                             icon="plus"
                             button-type="Primary" />
+                }
             </abp-column>
         </abp-row>
     </abp-card-header>

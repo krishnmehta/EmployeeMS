@@ -8,9 +8,12 @@ public class EmployeeMSPermissionDefinitionProvider : PermissionDefinitionProvid
 {
     public override void Define(IPermissionDefinitionContext context)
     {
-        var myGroup = context.AddGroup(EmployeeMSPermissions.GroupName);
-        //Define your own permissions here. Example:
-        //myGroup.AddPermission(EmployeeMSPermissions.MyPermission1, L("Permission:MyPermission1"));
+        var employeeMSGroup = context.AddGroup(EmployeeMSPermissions.GroupName, L("Permission:EmployeeMS"));
+
+        var employeesPermission = employeeMSGroup.AddPermission(EmployeeMSPermissions.Employees.Default, L("Permission:Employees"));
+        employeesPermission.AddChild(EmployeeMSPermissions.Employees.Create, L("Permission:Employees.Create"));
+        employeesPermission.AddChild(EmployeeMSPermissions.Employees.Edit, L("Permission:Employees.Edit"));
+        employeesPermission.AddChild(EmployeeMSPermissions.Employees.Delete, L("Permission:Employees.Delete"));
     }
 
     private static LocalizableString L(string name)
