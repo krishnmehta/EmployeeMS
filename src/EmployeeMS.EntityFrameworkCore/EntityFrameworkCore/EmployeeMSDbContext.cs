@@ -1,4 +1,5 @@
-﻿using EmployeeMS.Employees;
+﻿using EmployeeMS.Departments;
+using EmployeeMS.Employees;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -27,6 +28,8 @@ public class EmployeeMSDbContext :
 {
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
     public DbSet<Employee> Employees { get; set; }
+    public DbSet<Department> Departments { get; set; }
+
 
     #region Entities from the modules
 
@@ -86,5 +89,20 @@ public class EmployeeMSDbContext :
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
 
         });
+
+        builder.Entity<Department>(b =>
+        {
+            b.ToTable(EmployeeMSConsts.DbTablePrefix + "Departments",
+                EmployeeMSConsts.DbSchema);
+
+            b.ConfigureByConvention();
+
+            b.Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(DepartmentConsts.MaxNameLength);
+
+            b.HasIndex(x => x.Name);
+        });
+
     }
 }
