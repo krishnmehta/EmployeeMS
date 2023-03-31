@@ -42,16 +42,16 @@ namespace EmployeeMS.Employees
 
         public override async Task<EmployeeDto> GetAsync(Guid id)
         {
-            //Get the IQueryable<Book> from the repository
+            //Get the IQueryable<Employee> from the repository
             var queryable = await Repository.GetQueryableAsync();
 
-            //Prepare a query to join books and authors
+            //Prepare a query to join employees and departments
             var query = from employee in queryable
                         join department in await _departmentRepository.GetQueryableAsync() on employee.DepartmentId equals department.Id
                         where employee.Id == id
                         select new { employee, department };
 
-            //Execute the query and get the book with author
+            //Execute the query and get the book with department
             var queryResult = await AsyncExecuter.FirstOrDefaultAsync(query);
             if (queryResult == null)
             {

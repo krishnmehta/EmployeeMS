@@ -19,7 +19,7 @@
                             [
                                 {
                                     text: l('Edit'),
-                                    visible: abp.auth.isGranted('EmployeeMS.Employees.Edit'), //checking for permission
+                                    visible: abp.auth.isGranted('EmployeeMS.Employees.Edit'), //checking for Permission
                                     action: function (data) {
                                         editModal.open({ id: data.record.id });
                                     }
