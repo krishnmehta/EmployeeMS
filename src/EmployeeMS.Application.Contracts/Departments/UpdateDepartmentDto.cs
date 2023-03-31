@@ -9,5 +9,6 @@ public class UpdateDepartmentDto
     [StringLength(DepartmentConsts.MaxNameLength)]
     public string Name { get; set; }
 
+    
     public string ShortBio { get; set; }
 }

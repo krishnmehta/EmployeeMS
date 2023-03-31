@@ -46,6 +46,12 @@ public class EmployeeMSMenuContributor : IMenuContributor
                     l["Menu:Employees"],
                     url: "/Employees"
                 ).RequirePermissions(EmployeeMSPermissions.Employees.Default) //checking the permission
+            ).AddItem(
+                new ApplicationMenuItem(
+                    "EmployeeMS.Departments",
+                    l["Menu:Departments"],
+                    url: "/Departments"
+                ).RequirePermissions(EmployeeMSPermissions.Employees.Default)
             )
         );
 

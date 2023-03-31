@@ -20,7 +20,7 @@ public class DepartmentAppService : EmployeeMSAppService, IDepartmentAppService
         DepartmentManager departmentManager)
     {
         _departmentRepository = departmentRepository;
-        _departmentRepository = departmentRepository;
+        _departmentManager = departmentManager;
     }
 
     //...SERVICE METHODS WILL COME HERE...
@@ -61,9 +61,7 @@ public class DepartmentAppService : EmployeeMSAppService, IDepartmentAppService
             input.Name,
             input.ShortBio
         );
-
         await _departmentRepository.InsertAsync(department);
-
         return ObjectMapper.Map<Department, DepartmentDto>(department);
     }
 

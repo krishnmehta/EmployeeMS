@@ -4,5 +4,5 @@ namespace EmployeeMS.Departments;
 
 public class GetDepartmentListDto : PagedAndSortedResultRequestDto
 {
-    public string Filter { get; set; }
+    public string? Filter { get; set; }
 }
