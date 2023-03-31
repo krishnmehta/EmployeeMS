@@ -19,5 +19,8 @@ namespace EmployeeMS.Employees
 
         [Required]
         public float Salary { get; set; }
+
+        public Guid DepartmentId { get; set; }
+
     }
 }

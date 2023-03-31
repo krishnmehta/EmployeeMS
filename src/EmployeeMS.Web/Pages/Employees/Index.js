@@ -8,7 +8,7 @@
             serverSide: true,
             paging: true,
             order: [[1, "asc"]],
-            searching: false,
+            searching: true,
             scrollX: true,
             ajax: abp.libs.datatables.createAjax(employeeMS.employees.employee.getList),
             columnDefs: [
@@ -50,6 +50,10 @@
                 {
                     title: l('Name'),
                     data: "name"
+                },
+                {
+                    title: l('Department'),
+                    data: "departmentName"
                 },
                 {
                     title: l('Age'),

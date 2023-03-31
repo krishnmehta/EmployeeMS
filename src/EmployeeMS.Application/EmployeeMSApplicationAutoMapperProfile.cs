@@ -14,6 +14,8 @@ public class EmployeeMSApplicationAutoMapperProfile : Profile
         CreateMap<Employee, EmployeeDto>();
         CreateMap<CreateUpdateEmployeeDto, Employee>();
         CreateMap<Department, DepartmentDto>();
+        CreateMap<Department, DepartmentLookupDto>();
+
 
     }
 }

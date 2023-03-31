@@ -16,5 +16,8 @@ namespace EmployeeMS.Employees
         public string Email { get; set; }
 
         public float Salary { get; set; }
+
+        public Guid DepartmentId { get; set; }
+
     }
 }
